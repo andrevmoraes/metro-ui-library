@@ -3,8 +3,8 @@
  * Componentes reutilizáveis no estilo Windows Phone / Metro
  */
 
+import React, { ReactNode, forwardRef } from 'react';
 import { MetroColors } from '../constants/metro-design-system';
-import { ReactNode, forwardRef } from 'react';
 
 // ============================================
 // METRO BUTTON
