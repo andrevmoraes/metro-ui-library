@@ -5,6 +5,7 @@
 
 import React, { ReactNode, forwardRef } from 'react';
 import { MetroColors } from '../constants/metro-design-system';
+import styles from './metro-ui.module.css';
 
 // ============================================
 // METRO BUTTON
@@ -33,29 +34,20 @@ export function MetroButton({
   className = '',
   type = 'button',
 }: MetroButtonProps) {
-  const baseStyles = `
-    font-segoe uppercase tracking-wide font-semibold
-    border-none transition-all duration-200
-    disabled:opacity-50 disabled:cursor-not-allowed
-    active:scale-95
-    touch-manipulation
-    min-h-[44px] md:min-h-[40px]
-  `;
+  const sizeClass = {
+    sm: styles.buttonSm,
+    base: styles.buttonBase,
+    lg: styles.buttonLg,
+  }[size];
 
-  const sizeStyles = {
-    sm: 'h-10 md:h-8 px-4 md:px-3 text-xs',
-    base: 'h-12 md:h-10 px-6 md:px-5 text-sm',
-    lg: 'h-14 md:h-12 px-8 md:px-7 text-base',
-  };
+  const variantClass = {
+    primary: styles.buttonPrimary,
+    secondary: styles.buttonSecondary,
+    ghost: styles.buttonGhost,
+    danger: styles.buttonDanger,
+  }[variant];
 
-  const variantStyles = {
-    primary: `text-white hover:opacity-90`,
-    secondary: `border-2 hover:bg-opacity-10`,
-    ghost: `bg-transparent hover:bg-opacity-10`,
-    danger: `bg-[${MetroColors.red}] text-white hover:opacity-90`,
-  };
-
-  const widthStyle = fullWidth ? 'w-full' : '';
+  const widthClass = fullWidth ? styles.buttonFullWidth : '';
 
   const style: React.CSSProperties = {};
   if (variant === 'primary' || variant === 'danger') {
@@ -63,7 +55,9 @@ export function MetroButton({
   }
   if (variant === 'secondary' || variant === 'ghost') {
     style.color = accentColor;
-    style.borderColor = variant === 'secondary' ? accentColor : 'transparent';
+    if (variant === 'secondary') {
+      style.borderColor = accentColor;
+    }
   }
 
   return (
@@ -71,7 +65,7 @@ export function MetroButton({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${widthStyle} ${className}`}
+      className={`${styles.metroButton} ${sizeClass} ${variantClass} ${widthClass} ${className}`}
       style={style}
     >
       {children}
@@ -101,28 +95,19 @@ export function MetroTile({
   className = '',
   hoverable = true,
 }: MetroTileProps) {
-  const sizeStyles = {
-    small: 'aspect-square',
-    medium: 'aspect-square',
-    wide: 'aspect-[2/1]',
-    large: 'aspect-square',
-  };
+  const sizeClass = {
+    small: styles.tileSmall,
+    medium: styles.tileMedium,
+    wide: styles.tileWide,
+    large: styles.tileLarge,
+  }[size];
 
-  const interactionStyles = hoverable
-    ? 'cursor-pointer active:opacity-80 touch-manipulation'
-    : '';
+  const hoverClass = hoverable ? styles.tileHoverable : '';
 
   return (
     <div
       onClick={onClick}
-      className={`
-        p-4 sm:p-5 md:p-6 
-        flex flex-col justify-between
-        transition-opacity duration-100
-        ${sizeStyles[size]}
-        ${interactionStyles}
-        ${className}
-      `}
+      className={`${styles.metroTile} ${sizeClass} ${hoverClass} ${className}`}
       style={{ backgroundColor: color }}
     >
       {children}
@@ -163,7 +148,8 @@ export const MetroInput = forwardRef<HTMLInputElement, MetroInputProps>(function
   className = '',
   autoComplete,
 }, ref) {
-  const widthStyle = fullWidth ? 'w-full' : '';
+  const widthClass = fullWidth ? styles.inputFullWidth : '';
+  const errorClass = error ? styles.inputError : '';
 
   return (
     <input
@@ -174,23 +160,11 @@ export const MetroInput = forwardRef<HTMLInputElement, MetroInputProps>(function
       placeholder={placeholder}
       disabled={disabled}
       autoComplete={autoComplete}
-      className={`
-        h-12 md:h-10 px-4 md:px-3 
-        font-segoe
-        border-2
-        transition-all duration-200
-        focus:outline-none
-        disabled:opacity-50 disabled:cursor-not-allowed
-        touch-manipulation
-        ${error ? 'border-red-500' : ''}
-        ${widthStyle}
-        ${className}
-      `}
+      className={`${styles.metroInput} ${errorClass} ${widthClass} ${className}`}
       style={{
         backgroundColor: bgColor,
         color: textColor,
         borderColor: error ? MetroColors.red : '#666666',
-        fontSize: '16px',
       }}
       onFocus={(e) => {
         e.target.style.borderColor = accentColor;
@@ -232,26 +206,26 @@ export function MetroHeader({
   className = '',
 }: MetroHeaderProps) {
   return (
-    <header className={`py-6 ${className}`}>
-      <div className="flex items-center justify-between">
+    <header className={`${styles.metroHeader} ${className}`}>
+      <div className={styles.headerContainer}>
         <div>
           {onBack && (
             <button
               onClick={onBack}
-              className="mb-2 font-segoe text-sm uppercase tracking-wide hover:opacity-80"
+              className={styles.headerBack}
               style={{ color: accentColor }}
             >
               ← voltar
             </button>
           )}
           <h1
-            className="font-segoe text-4xl font-light lowercase mb-1"
+            className={styles.headerTitle}
             style={{ color: textColor }}
           >
             {title}
           </h1>
           {subtitle && (
-            <p className="font-segoe text-sm opacity-60" style={{ color: textColor }}>
+            <p className={styles.headerSubtitle} style={{ color: textColor }}>
               {subtitle}
             </p>
           )}
@@ -260,7 +234,7 @@ export function MetroHeader({
         {actionLabel && onAction && (
           <button
             onClick={onAction}
-            className="font-segoe text-sm uppercase tracking-wide hover:opacity-80 transition-opacity"
+            className={styles.headerAction}
             style={{ color: accentColor }}
           >
             {actionLabel}
@@ -297,9 +271,9 @@ export function MetroLoading({
   const { container, dot } = sizeMap[size];
 
   const content = (
-    <div className="flex flex-col items-center gap-6">
+    <div className={styles.metroLoading}>
       <div 
-        className="relative" 
+        className={styles.loadingContainer}
         style={{ width: container, height: container }}
       >
         {[0, 1, 2, 3, 4, 5].map((index) => {
@@ -311,7 +285,7 @@ export function MetroLoading({
           return (
             <div
               key={index}
-              className="absolute rounded-full animate-windows-dot"
+              className={styles.loadingDot}
               style={{
                 width: dot,
                 height: dot,
@@ -325,7 +299,7 @@ export function MetroLoading({
         })}
       </div>
       {text && (
-        <p className="font-segoe text-sm lowercase" style={{ color }}>
+        <p className={styles.loadingText} style={{ color }}>
           {text}
         </p>
       )}
@@ -334,7 +308,7 @@ export function MetroLoading({
 
   if (fullScreen) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-black">
+      <div className={styles.loadingFullScreen}>
         {content}
       </div>
     );
@@ -362,20 +336,20 @@ export function MetroModal({
 }: MetroModalProps) {
   if (!isOpen) return null;
 
-  const maxWidthStyles = {
-    sm: 'max-w-sm',
-    md: 'max-w-md',
-    lg: 'max-w-lg',
-    xl: 'max-w-xl',
-  };
+  const maxWidthClass = {
+    sm: styles.modalSm,
+    md: styles.modalMd,
+    lg: styles.modalLg,
+    xl: styles.modalXl,
+  }[maxWidth];
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-70"
+      className={styles.metroModal}
       onClick={onClose}
     >
       <div
-        className={`w-full ${maxWidthStyles[maxWidth]} bg-white dark:bg-black border border-gray-800 shadow-2xl`}
+        className={`${styles.modalContent} ${maxWidthClass}`}
         onClick={(e) => e.stopPropagation()}
       >
         {children}
@@ -407,15 +381,15 @@ export function MetroStatsCard({
 }: MetroStatsCardProps) {
   return (
     <div
-      className={`p-4 border border-gray-800 ${className}`}
+      className={`${styles.metroStatsCard} ${className}`}
       style={{ backgroundColor: bgColor }}
     >
-      <div className="flex items-start justify-between">
+      <div className={styles.statsCardContent}>
         <div>
-          <p className="font-segoe text-3xl font-light" style={{ color }}>
+          <p className={styles.statsValue} style={{ color }}>
             {value}
           </p>
-          <p className="font-segoe text-xs uppercase opacity-60" style={{ color }}>
+          <p className={styles.statsLabel} style={{ color }}>
             {label}
           </p>
         </div>

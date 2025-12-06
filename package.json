@@ -1,6 +1,6 @@
 {
   "name": "@andrevmoraes/metro-ui",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Metro UI components library inspired by Windows Phone design",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && copyfiles -u 1 src/**/*.css dist/",
     "prepublishOnly": "npm run build"
   },
   "repository": {
@@ -37,6 +37,7 @@
     "@types/node": "^20.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "copyfiles": "^2.4.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "typescript": "^5.0.0"

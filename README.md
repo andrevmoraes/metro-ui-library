@@ -2,6 +2,8 @@
 
 Metro UI components library inspired by Windows Phone design for React/Next.js applications.
 
+**✨ Works with any React project** - No Tailwind CSS required! Styles are bundled with the components using CSS Modules.
+
 ## Installation
 
 ```bash
@@ -29,7 +31,7 @@ export default function MyComponent() {
         <h2>My Tile</h2>
       </MetroTile>
       
-      <MetroButton variant="primary">
+      <MetroButton variant="primary" accentColor={MetroColors.purple}>
         Click me
       </MetroButton>
     </div>
@@ -41,8 +43,47 @@ export default function MyComponent() {
 
 - **MetroTile**: Windows Phone style tiles (small, medium, wide, large)
 - **MetroButton**: Metro style buttons (primary, secondary, ghost, danger)
+- **MetroInput**: Metro style input with focus states
+- **MetroHeader**: Metro style page headers with optional back button
+- **MetroLoading**: Windows-style loading indicator
+- **MetroModal**: Metro style modals
+- **MetroStatsCard**: Statistical cards with Metro styling
 - **Theme System**: Complete light/dark theme support
 - **Metro Colors**: Windows Phone inspired color palette
+
+## Customization
+
+All components support customization through props and CSS classes:
+
+```tsx
+// Via props
+<MetroButton 
+  accentColor="#FF6B6B" 
+  size="lg" 
+  fullWidth
+>
+  Custom Button
+</MetroButton>
+
+// Via className
+<MetroButton className="my-custom-class">
+  Button
+</MetroButton>
+
+// Via inline styles
+<MetroButton style={{ marginTop: '20px' }}>
+  Button
+</MetroButton>
+```
+
+## Compatibility
+
+- ✅ React 18/19
+- ✅ Next.js
+- ✅ Vite
+- ✅ Create React App
+- ✅ Works with any CSS approach (CSS Modules, Styled Components, plain CSS)
+- ✅ PWA compatible
 
 ## License
 

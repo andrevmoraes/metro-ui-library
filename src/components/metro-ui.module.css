@@ -1,0 +1,369 @@
+/**
+ * 🎨 METRO UI - ESTILOS BASE
+ * CSS Modules para componentes Metro UI
+ */
+
+/* ============================================
+   METRO BUTTON
+   ============================================ */
+
+.metroButton {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 200ms ease;
+  touch-action: manipulation;
+  min-height: 44px;
+}
+
+@media (min-width: 768px) {
+  .metroButton {
+    min-height: 40px;
+  }
+}
+
+.metroButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.metroButton:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+/* Tamanhos */
+.buttonSm {
+  height: 40px;
+  padding: 0 16px;
+  font-size: 12px;
+}
+
+@media (min-width: 768px) {
+  .buttonSm {
+    height: 32px;
+    padding: 0 12px;
+  }
+}
+
+.buttonBase {
+  height: 48px;
+  padding: 0 24px;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .buttonBase {
+    height: 40px;
+    padding: 0 20px;
+  }
+}
+
+.buttonLg {
+  height: 56px;
+  padding: 0 32px;
+  font-size: 16px;
+}
+
+@media (min-width: 768px) {
+  .buttonLg {
+    height: 48px;
+    padding: 0 28px;
+  }
+}
+
+/* Variantes */
+.buttonPrimary {
+  color: #FFFFFF;
+}
+
+.buttonPrimary:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.buttonSecondary {
+  background-color: transparent;
+  border: 2px solid;
+}
+
+.buttonSecondary:hover:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.buttonGhost {
+  background-color: transparent;
+}
+
+.buttonGhost:hover:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.buttonDanger {
+  color: #FFFFFF;
+}
+
+.buttonDanger:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.buttonFullWidth {
+  width: 100%;
+}
+
+/* ============================================
+   METRO TILE
+   ============================================ */
+
+.metroTile {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: opacity 100ms ease;
+}
+
+@media (min-width: 640px) {
+  .metroTile {
+    padding: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .metroTile {
+    padding: 24px;
+  }
+}
+
+.tileSmall,
+.tileMedium,
+.tileLarge {
+  aspect-ratio: 1 / 1;
+}
+
+.tileWide {
+  aspect-ratio: 2 / 1;
+}
+
+.tileHoverable {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.tileHoverable:active {
+  opacity: 0.8;
+}
+
+/* ============================================
+   METRO INPUT
+   ============================================ */
+
+.metroInput {
+  height: 48px;
+  padding: 0 16px;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  border: 2px solid #666666;
+  transition: all 200ms ease;
+  touch-action: manipulation;
+  font-size: 16px;
+}
+
+@media (min-width: 768px) {
+  .metroInput {
+    height: 40px;
+    padding: 0 12px;
+  }
+}
+
+.metroInput:focus {
+  outline: none;
+}
+
+.metroInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.inputError {
+  border-color: #E81123;
+}
+
+.inputFullWidth {
+  width: 100%;
+}
+
+/* ============================================
+   METRO HEADER
+   ============================================ */
+
+.metroHeader {
+  padding: 24px 0;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerBack {
+  margin-bottom: 8px;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+}
+
+.headerBack:hover {
+  opacity: 0.8;
+}
+
+.headerTitle {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 36px;
+  font-weight: 300;
+  text-transform: lowercase;
+  margin-bottom: 4px;
+}
+
+.headerSubtitle {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.headerAction {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+}
+
+.headerAction:hover {
+  opacity: 0.8;
+}
+
+/* ============================================
+   METRO LOADING
+   ============================================ */
+
+.metroLoading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.loadingContainer {
+  position: relative;
+}
+
+.loadingDot {
+  position: absolute;
+  border-radius: 50%;
+  animation: windowsDot 1.2s ease-in-out infinite;
+}
+
+@keyframes windowsDot {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.loadingText {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 14px;
+  text-transform: lowercase;
+}
+
+.loadingFullScreen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+}
+
+/* ============================================
+   METRO MODAL
+   ============================================ */
+
+.metroModal {
+  position: fixed;
+  inset: 0;
+  z-index: 1300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modalContent {
+  width: 100%;
+  background-color: #FFFFFF;
+  border: 1px solid #2A2A2A;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+}
+
+.modalContentDark {
+  background-color: #000000;
+}
+
+.modalSm {
+  max-width: 384px;
+}
+
+.modalMd {
+  max-width: 448px;
+}
+
+.modalLg {
+  max-width: 512px;
+}
+
+.modalXl {
+  max-width: 576px;
+}
+
+/* ============================================
+   METRO STATS CARD
+   ============================================ */
+
+.metroStatsCard {
+  padding: 16px;
+  border: 1px solid #2A2A2A;
+}
+
+.statsCardContent {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.statsValue {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 32px;
+  font-weight: 300;
+}
+
+.statsLabel {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
